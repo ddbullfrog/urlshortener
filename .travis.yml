@@ -1,0 +1,10 @@
+language: java
+jdk:
+  - oraclejdk8
+services:
+  - redis
+sudo: required
+script: mvn clean compile
+notifications:
+    on_success: never
+    on_failure: always
