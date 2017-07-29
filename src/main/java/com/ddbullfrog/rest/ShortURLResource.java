@@ -1,7 +1,7 @@
 package com.ddbullfrog.rest;
 
 import com.ddbullfrog.domain.ShortURL;
-import com.ddbullfrog.dto.ShortenUrlRequest;
+import com.ddbullfrog.dto.ShortenURLRequest;
 import com.ddbullfrog.repository.ShortURLRepository;
 import com.ddbullfrog.util.Codec;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class ShortURLResource {
     Random rn = new Random();
 
     @PostMapping(path = "/urls")
-    public ResponseEntity<ShortURL> shorten(@Valid @RequestBody ShortenUrlRequest request) {
+    public ResponseEntity<ShortURL> shorten(@Valid @RequestBody ShortenURLRequest request) {
 
         int id = redisAtomicInteger.addAndGet(rn.nextInt(3) + 1);
 

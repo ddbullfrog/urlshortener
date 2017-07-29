@@ -5,10 +5,11 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.index.Indexed;
 
+import java.io.Serializable;
 import java.time.Instant;
 
 @RedisHash("shorturls")
-public class ShortURL {
+public class ShortURL implements Serializable {
 
     @Id
     @JsonIgnore
@@ -61,5 +62,16 @@ public class ShortURL {
 
     public void setHit(int hit) {
         this.hit = hit;
+    }
+
+    @Override
+    public String toString() {
+        return "ShortURL{" +
+                "id=" + id +
+                ", slug='" + slug + '\'' +
+                ", url='" + url + '\'' +
+                ", createDate=" + createDate +
+                ", hit=" + hit +
+                '}';
     }
 }

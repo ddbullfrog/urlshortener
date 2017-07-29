@@ -3,8 +3,9 @@ package com.ddbullfrog.dto;
 import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
-public class ShortenUrlRequest {
+public class ShortenURLRequest implements Serializable {
 
     @NotNull
     @URL
@@ -16,5 +17,12 @@ public class ShortenUrlRequest {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public String toString() {
+        return "ShortenURLRequest{" +
+                "url='" + url + '\'' +
+                '}';
     }
 }
