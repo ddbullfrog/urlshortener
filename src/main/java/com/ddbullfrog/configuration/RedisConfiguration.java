@@ -15,15 +15,17 @@ import org.springframework.data.redis.support.atomic.RedisAtomicInteger;
 @EnableRedisRepositories
 public class RedisConfiguration {
 
+    private static final String URL_UNIQUE_COUNTER = "URL_UNIQUE_COUNTER";
+
     @Autowired
     RedisProperties redisProperties;
 
     @Bean
     public JedisConnectionFactory jedisConnectionFactory() {
         JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();
-        jedisConnectionFactory.setHostName("localhost");
-        jedisConnectionFactory.setPort(6379);
-        jedisConnectionFactory.setTimeout(30000);
+        jedisConnectionFactory.setHostName(redisProperties.getHost());
+        jedisConnectionFactory.setPort(redisProperties.getPort());
+        jedisConnectionFactory.setTimeout(redisProperties.getTimeout());
         jedisConnectionFactory.setUsePool(true);
 
         return jedisConnectionFactory;
@@ -40,6 +42,6 @@ public class RedisConfiguration {
 
     @Bean
     public RedisAtomicInteger redisAtomicInteger() {
-        return new RedisAtomicInteger("URL_UNIQUE_COUNTER", jedisConnectionFactory());
+        return new RedisAtomicInteger(URL_UNIQUE_COUNTER, jedisConnectionFactory());
     }
 }
