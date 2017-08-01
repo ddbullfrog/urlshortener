@@ -13,17 +13,3 @@ services:
 - redis
 install: true
 script: mvn clean install docker:build
-env:
-  global:
-  - COMMIT=${TRAVIS_COMMIT::8}
-  - secure: F4BDbTV5lH1/CMpQ2sBIVbAmY/kwXS1gDIYzMdhXk05LdN+5Y4k1mpdsfOWCdfASz7z+fNJ9cWoYsLlRiDy71yY/5DyTnxuqDvrzzD863I1zAL3yrsG9snU2iwud8V8CKJV9dyPmXQRfgbDZyOIWIsgz48psMln8v0pZlHtDyz2mZiGYKRBJm4kO7/Upl5pMdPwtOQOpHmNt9/JilNFjTyD5j8QTxPDNrbRuGuwzHNuYEuiX3bBvZX0v6UpFkdRtXofCp0BZBJFA+jThrBYgQ73r1Cby90Ei6JQcWaUU2z3GY0OEGBQMNli8OHLSnHHq62EdwRG+tlkFJO7wC8gCME+7EHuhXXGuwUf1croumtDZHGcmgrjvZwSCMqwleKthWM2AL7dzsg5DZFBH5FUBd70MS4jKu9eFAqm0ssicvUnyL4Ppw61zfGMJSSIvUWCqX/xw/pX1bhmRySdn2jYTj8NPlrq+cyPlLVgAUicMfiypVm7qvai6Fn1n8ja0dbBls/Dxw+XOVs1Esp1d9HsED6iph5fNhgNW1Q6PKLG7LZQWhY7nU0AlEXCYOVUwpIm+9kxFgldH0TTg6vDI0SgLGye0DjREEJUfcD+6xHIjCjT4dwNL0YW8ihVLBp8GGgGCpactRD1WN6mbb4hKQLTHtoA5F4pz6xC9ohxXs7DwB1Y=
-  - secure: 2711hi4exxAlr+hqn73YhfQ/0PTtwDrZUKYFKuqv5n3Rod8siV7v1lPpoyIiGxgqofb+pvJ/4MBvG6wYAGbB6cXemybkgs5P9LWvQW3b5oyIZr4A6gc5VTP9IrqBYrqpEvtsAkmISm4982DhOJ0gr11JBoL0uhLmBYuQTm0PXq5w5s5WYRI18Uw3U/liUDcKq++4RfvIYMBrnKyDJ1BN368NuGZ4d1XShWxRJzyLdkmll+AAD5fXLoGsGngHlPi2s/EtWoYw5HcAdsSCNPufrjB4eOq1Q6xs0/DQE6G7Zk9YomL3hWRz34TGVhg96jPQXakA9Ktf4XYhCGFcf4SKYX1CrRynrwGlUqeUxHK7YuZpE9vZwXuemDulETKTikYvh08VMcFf8ziqSmLnGTZf/jogkxcoG6fXV7q7CL1IKm+Sj0HaxWtw3vJJL5R6lhyIYoZith03T+D4u78+Hm/dF4C+nUevPaw0sYr+1SK1/VR5SAVxtrbJZmxL+sdfmjmYxw4QWjhyI513z5zfTGyWElmehwwGxJRYc2wD8sDeiNUqNwEftF6GkK2dNG7PMx+Xi5p4TAwV24n0GGFxAHOHzX0LSRWQjbatftHuFMsuqLu/m8+EHX7Kn4aN4y2byZtb1T7u9aQ2zGHX8Pj79zst1CNjWGco1G4q25Aarr74jq0=
-
-after_success:
-- docker login -u $DOCKER_USER -p $DOCKER_PASS
-- export REPO=`ddbullfrog/urlshortener`
-- export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH
-  ; fi`
-- docker tag $REPO:$COMMIT $REPO:$TAG
-- docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
-- docker push $REPO
